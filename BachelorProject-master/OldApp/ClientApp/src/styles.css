@@ -1,0 +1,544 @@
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Poppins&family=Young+Serif&display=swap');
+
+/* Reset default margin, padding, and box-sizing */
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Apply styling to the <main> element */
+#main {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #DEF5E5;
+  font-family: 'Gabarito', sans-serif;
+}
+
+/* Apply styling to <h1> elements */
+h1, h2 {
+  font-family: 'Young Serif', sans-serif;
+}
+
+/* Apply styling for nav lists */
+li {
+  font-family: 'Gabarito', sans-serif;
+  transition: 200ms;
+  border-radius: 5px;
+}
+
+  li:hover {
+    background-color: #def5e5;
+  }
+
+
+/* Apply background images and styles to different sections */
+.create-folder {
+  background-image: url(assets/img/folders.png);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-size: 35%;
+}
+
+.create-deck {
+  background-image: url(assets/img/learning.png);
+  background-repeat: no-repeat;
+  background-position-x: left;
+  background-position-y: bottom;
+  background-size: 35%;
+}
+
+.create-flashcard {
+  background-image: url(assets/img/create-flashcard.png);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-size: 35%;
+}
+
+.delete-folder {
+  background-image: url(assets/img/delete-folder.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.delete-deck {
+  background-image: url(assets/img/delete-deck.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.delete-flashcard {
+  background-image: url(assets/img/delete-flashcard.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.about-us-intro {
+  background-image: url(assets/img/learning-about.png);
+  opacity: 0.6;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  height: 25rem;
+}
+
+.about-us {
+  background-image: url(assets/img/AIabout.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  background-position-y: center;
+  width: 140rem;
+}
+.character img{
+  width: 50%;
+}
+.member-info {
+  opacity: 1;
+  filter: blur(0);
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Adjust the opacity transition duration as needed */
+}
+  .member-info:hover {
+    opacity: 0;
+    filter: blur(2rem);
+    transform: scale(1.05);
+  }
+.searchBar {
+  margin-left: -40px;
+}
+.bar{
+    border-radius: 5px;
+    opacity: 0;
+    width: 0%;
+    height: 15px;
+    transition: width 2s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* CART */
+.cart-cooking.active{
+    background-color: green;
+    opacity: 1;
+    width: 80%;
+    animation: grade-A 1.5s ease-in-out;
+}
+.cart-intelligence.active {
+  background-color: #BA0000;
+  opacity: 1;
+  width: 14%;
+  animation: grade-E 1.5s ease-in-out;
+}
+.cart-punctuality.active {
+  background-color: darkred;
+  opacity: 1;
+  width: 5%;
+}
+.cart-height.active {
+  background-color: yellow;
+  opacity: 1;
+  width: 52%;
+  animation: grade-C 1.5s ease-in-out;
+}
+/* EMIL */
+.emil-curiosity.active {
+  background-color: green;
+  opacity: 1;
+  width: 84%;
+  animation: grade-A 1.5s ease-in-out;
+}
+
+.emil-strength.active {
+  background-color: darkred;
+  opacity: 1;
+  width: 10%;
+}
+
+.emil-sleeping.active {
+  background-color: darkred;
+  opacity: 1;
+  width: 5%;
+}
+
+.emil-height.active {
+  background-color: rebeccapurple;
+  opacity: 1;
+  width: 100%;
+  animation: grade-S 1.5s ease-in-out;
+}
+/* ELIJAH */
+.elijah-drawing.active {
+  background-color: rebeccapurple;
+  opacity: 1;
+  width: 100%;
+  animation: grade-S 1.5s ease-in-out;
+}
+
+.elijah-jumpshot.active {
+  background-color: orange;
+  opacity: 1;
+  width: 30%;
+  animation: grade-D 1.5s ease-in-out;
+}
+
+.elijah-sleeping.active {
+  background-color: yellowgreen;
+  opacity: 1;
+  width: 65%;
+  animation: grade-C 1.5s ease-in-out;
+}
+
+.elijah-height.active {
+  background-color: darkred;
+  opacity: 1;
+  width: 4%;
+}
+@keyframes grade-S {
+  13% {
+    background-color: darkred;
+  }
+
+  28% {
+    background-color: #BA0000;
+  }
+
+  43% {
+    background-color: orange;
+  }
+
+  58% {
+    background-color: yellow;
+  }
+
+  73% {
+    background-color: yellowgreen;
+  }
+
+  88% {
+    background-color: green;
+  }
+
+  100% {
+      background-color: rebeccapurple;
+  }
+}
+@keyframes grade-A {
+  20% {
+    background-color: darkred;
+  }
+
+  35% {
+    background-color: #BA0000;
+  }
+
+  50% {
+    background-color: orange;
+  }
+
+  65% {
+    background-color: yellow;
+  }
+
+  80% {
+    background-color: yellowgreen;
+  }
+  100% {
+    background-color: green;
+  }
+}
+@keyframes grade-B {
+  20% {
+    background-color: darkred;
+  }
+
+  40% {
+    background-color: #BA0000;
+  }
+
+  60% {
+    background-color: orange;
+  }
+
+  80% {
+    background-color: yellow;
+  }
+
+  100% {
+    background-color: yellowgreen;
+  }
+}
+@keyframes grade-C {
+  25% {
+    background-color: darkred;
+  }
+
+  50% {
+    background-color: #BA0000;
+  }
+
+  75% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: yellow;
+  }
+}
+@keyframes grade-D {
+  33% {
+    background-color: darkred;
+  }
+
+  66% {
+    background-color: #BA0000;
+  }
+
+  100% {
+    background-color: orange;
+  }
+}
+@keyframes grade-E {
+  50% {
+    background-color: darkred;
+  }
+
+  100% {
+    background-color: #BA0000;
+  }
+}
+
+
+
+/* Styles for the flip card animation */
+.carousel-container {
+  background-color: #BCEAD5;
+  height: 35rem;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 3rem;
+}
+
+#flashcard-one {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carousel-item {
+  height: 35rem;
+}
+
+.flip-card-inner {
+  height:100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flip-card {
+  perspective: 1000px;
+  height: 100%;
+}
+
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card .flip-card-front,
+  .flip-card .flip-card-back {
+    backface-visibility: hidden;
+  }
+
+.flip-card-front,
+.flip-card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.flip-card-back {
+  transform: rotateY(-180deg);
+}
+
+/* Styling for flashcard type two */
+.front,
+.back {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.front {
+  background-color: lightblue;
+}
+
+.back {
+  background-color: lightseagreen;
+}
+
+.match-card {
+  width: 13rem;
+  height: 10rem;
+  word-wrap: break-word;
+}
+
+.instruction {
+  font-family: 'Young Serif', sans-serif;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 5rem;
+}
+/* Styling for flashcard type three */
+#type-3 {
+  flex-direction: row;
+}
+
+  #type-3 div {
+    width: 100%;
+    height: 100%;
+  }
+.response {
+  padding: 3rem
+}
+
+/* Add position: relative to the container */
+.wrap {
+  position: absolute;
+  width: fit-content;
+  padding: 1rem;
+  z-index: 2;
+}
+/* Style for the tooltip */
+.tool::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: 30%;
+  left: 270%;
+  width: 15rem;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.3s ease;
+  z-index: 1;
+}
+
+/* Show the tooltip on hover or focus */
+.tool:hover::after,
+.tool:focus::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Media query for responsive design */
+@media (max-width: 1400px) {
+  .flashcard-qa {
+    font-size: 15px;
+  }
+
+  .front,
+  .back,
+  #ins {
+    padding: 0.4rem;
+    font-size: 14px;
+  }
+
+  .match-card {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+/* Media query for responsive design */
+@media (max-width: 1200px) {
+  .flashcard-qa {
+    font-size: 15px;
+  }
+
+  .tool::after {
+    font-size: 15px;
+    width: 15rem;
+  }
+
+  .front,
+  .back,
+  #ins {
+    padding: 0.4rem;
+    font-size: 12px;
+  }
+
+  .match-card {
+    width: 9rem;
+    height: 9rem;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .flashcard-qa {
+    font-size: 12px;
+  }
+  .skill{
+      font-size: 10px;
+  }
+  .bar{
+      height: 10px;
+  }
+  .tool::after{
+      font-size: 12px;
+      width: 12rem;
+      left: 220%;
+  }
+  .front,
+  .back,
+  #ins {
+    padding: 0.4rem;
+    font-size: 10px;
+  }
+
+  .match-card {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  #type-3 {
+    font-size: 10px;
+    flex-direction: column;
+  }
+
+  .submit3 {
+    font-size: 10px;
+  }
+
+  .response {
+    padding: 1rem
+  }
+
+  .carousel-container{
+      padding: 1rem;
+  }
+
+  .hint-btn{
+      font-size: 12px;
+  }
+}
+

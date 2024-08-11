@@ -1,0 +1,71 @@
+trigger:
+  branches:
+    include:
+      - master # Adjust if you're deploying from a different branch
+  paths:
+    include:
+      - WebApp # Trigger the pipeline only if there are changes in the WebApp directory
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  nodeVersion: '18.x'
+  azureSubscription: 'aicee-bachelor-connection'
+  webAppName: 'aicee'
+  environmentName: 'dev'
+  webApiUrl: 'https://aicee-api.azurewebsites.net/'
+
+stages:
+  - stage: Build
+    displayName: 'Build stage'
+    jobs:
+      - job: BuildJob
+        displayName: 'Build React App'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(nodeVersion)
+            displayName: 'Install Node.js'
+
+          - script: |
+              echo "VITE_WEB_API_URL=$(webApiUrl)" > WebApp/.env.development
+            displayName: 'Create development .env file'
+
+          - script: |
+              rm -rf node_modules package-lock.json
+              npm install --verbose
+              VITE_WEB_API_URL=$(webApiUrl) npx vite build
+            workingDirectory: WebApp
+            displayName: 'Clean install and build'
+
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: 'WebApp/dist' # Vite builds to the dist folder by default
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/webapp.zip'
+            displayName: 'Archive Web App'
+
+          - publish: '$(Build.ArtifactStagingDirectory)/webapp.zip'
+            artifact: webapp
+
+  - stage: Deploy
+    displayName: 'Deploy stage'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: DeployJob
+        displayName: 'Deploy to Azure Web App'
+        environment: dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: 'aicee-bachelor-connection'
+                    appType: 'webAppLinux' # Adjust if you're deploying to a Windows web app
+                    appName: 'aicee'
+                    package: '$(Pipeline.Workspace)/webapp/webapp.zip'
+                    #runtimeStack: 'NODE|18-lts' # Adjust the runtime stack based on your Node.js version

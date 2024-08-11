@@ -1,0 +1,60 @@
+<section class="w-100 vh-100 mt-5 create-deck">
+  <div class="container d-flex w-75 justify-content-between border border-1 p-0 shadow-sm bg-body rounded">
+    <!-- Left section with quote and icon -->
+    <div class="d-none d-md-block text-center w-50" style="background-color: #BCEAD5">
+      <div class="p-5 mt-5">
+        <i class="fas fa-book-open fa-9x mt-5 mb-4" style="color: #8ec3b0;"></i>
+        <figure>
+          <blockquote class="blockquote">
+            <p> “An investment in knowledge pays the best interest. ”</p>
+          </blockquote>
+          <figcaption class="blockquote-footer">
+            <cite title="Source Title">Emil Magnussen</cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <!-- Right section for creating a new deck -->
+    <div class="p-5 w-100">
+      <h2>{{isEditMode ? 'Update' : 'Create'}} Deck</h2>
+      <hr />
+      <!-- Form for creating a new deck -->
+      <form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
+        <!-- Deck Name input field -->
+        <div class="form-outline mb-4">
+          <label for="deckName"></label>
+          <input id="deckName" formControlName="deckName" type="text" class="form-control" autocomplete="off" placeholder="Input a deck name" required />
+        </div>
+        <div id="validationDeck">
+          <div *ngIf="deckForm.invalid" class="text-danger">
+            Write 2 - 15 characters long and do not use special character.
+          </div>
+        </div>
+        <!-- Folder selection dropdown -->
+        <div class="form-outline mb-4" id="folderSelect">
+          <label for="folderId"></label>
+          <select id="folderId" formControlName="folderId" class="form-control">
+            <option value="null">none</option>
+            <option *ngFor="let folder of folders" value="{{folder.FolderId}}">{{folder.FolderName}}</option>
+          </select>
+        </div>
+        <!-- Deck Description textarea -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="deckDescription"></label>
+          <textarea class="form-control" id="deckDescription" formControlName="deckDescription" rows="4" placeholder="Write something about your deck ....."></textarea>
+        </div>
+        <!-- Submit and Cancel buttons -->
+        <div class="form-outline mb-4 d-flex justify-content-between">
+          <button type="submit" class="btn btn-success btn-block mb-1 me-1"
+                  [disabled]="deckForm.invalid">
+            <i class="fa-solid fa-check"></i>
+          </button>
+          <a class="btn btn-secondary btn-block mb-1"
+             (click)="backToDecks()">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

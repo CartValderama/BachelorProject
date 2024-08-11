@@ -1,0 +1,37 @@
+<header style="position:fixed; z-index: 3; width: 100%;">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm shadow-sm"
+       style="background-color:#BCEAD5;">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <i class="fa-solid fa-crown me-3"></i>AI.CEE
+      </a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+           [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item me-3"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+
+          <li class="nav-item me-3" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/library']">Library</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/about']">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,127 @@
+<section class="container mb-5">
+  <!-- Container for the folder details section -->
+  <div class="d-flex justify-content-between align-items-end mt-5">
+    <!-- Return to Library button -->
+    <a class="btn btn-secondary btn-block"
+       [routerLink]="['/library']">
+      <i class="fa-solid fa-arrow-left-long"></i>
+    </a>
+    <!-- Folder title and options -->
+    <div class="d-flex justify-content-end align-items-start">
+      <!-- Folder title -->
+      <h1 class="m-0">Folder {{folder.FolderId}}</h1>
+      <!-- Edit Folder button -->
+      <a class="link-secondary text-decoration-none ms-2"
+         [routerLink]="['/folderform', 'update', folder.FolderId]">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </a>
+    </div>
+    <!-- Delete Folder button -->
+    <a class="link-secondary text-decoration-none ms-3"
+       data-bs-toggle="modal"
+       data-bs-target="#deletefolder">
+      <i class="fa-solid fa-trash fa-2x"></i>
+    </a>
+  </div>
+  <hr />
+  <div class="w-50 mt-4 mb-5" style="max-width: 15rem;">
+    <div class="input-group">
+      <input class="form-control border rounded-pill"
+             type="search"
+             placeholder="search"
+             [(ngModel)]="listFilter" />
+    </div>
+  </div>
+  <!-- Folder details -->
+  <div class="d-flex justify-content-even align-items-baseline flex-wrap mt-5 mb-4" style="word-break:break-word">
+    <!-- Folder name and description -->
+    <h2 class="m-2 ms-0 me-5">{{folder.FolderName}}</h2>
+    <p>{{folder.FolderDescription}}</p>
+  </div>
+  <!-- list decks -->
+  <div class="row row-cols-1 row-cols-md-3 g-5 p-2">
+    <div class="col">
+      <!-- Button to create a new deck in the folder -->
+      <a class="btn btn-outline-success text-decoration-none d-flex justify-content-center align-items-center shadow-md" style="height: 15rem;"
+         [routerLink]="['/deckform', 'create', folder.FolderId]">
+        <i class="fa-solid fa-plus fa-5x"></i>
+      </a>
+    </div>
+    <!-- Loop through each deck in the model -->
+    <div *ngFor="let deck of filteredDecks">
+      <div class="col">
+        <div class="card" style="height: 15rem; background-color: #BCEAD5;">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <!-- Display the deck name -->
+            {{deck.DeckName}}
+            <!-- Button to navigate to the deck dashboard -->
+            <a class="btn btn-light"
+               [routerLink]="['/deck', deck.DeckId]">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+          </div>
+          <div class="card-body d-flex flex-column justify-content-evenly overflow-hidden">
+            <!-- Display deck description -->
+            <p class="card-text">{{deck.DeckDescription}}</p>
+          </div>
+          <div class="card-footer text-muted d-flex justify-content-between">
+            <!-- Display the creation date of the deck -->
+            {{deck.CreationDate}}
+            <!-- Button to play flashcards in the deck -->
+            <a class="btn btn-light"
+               [routerLink]="['/flashcardone', deck.DeckId]">
+              Play<i class="fa-solid fa-play ms-2" style="color: green"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade"
+     id="deletefolder"
+     role="dialog"
+     data-bs-keyboard="false"
+     data-bs-backdrop="static"
+     aria-labelledby="deletemodal"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- Modal title -->
+        <h5 class="modal-title" id="exampleModalLabel">Delete Folder</h5>
+      </div>
+      <div class="modal-body">
+        <!-- Container for modal body content -->
+        <div class="container-sm d-flex bg-white justify-content-between ps-5 pe-5">
+          <div class="d-flex flex-column ">
+            <div>
+              <!-- Displaying folder details including ID, creation date, name, and the number of decks -->
+              <div class="text-danger-emphasis">
+                <p><i class="fa-solid fa-folder-closed me-2"></i> Folder ID: {{folder.FolderId}}</p>
+                <p><i class="fa-regular fa-calendar-days me-2"></i> Date Created: {{folder.CreationDate}}</p>
+                <p><i class="fa-solid fa-tag me-2"></i> Folder Name: {{folder.FolderName}}</p>
+              </div>
+              <hr />
+              <h6 class="text-danger">Are you sure that you want to delete this folder?</h6>
+            </div>
+          </div>
+          <!-- Visual representation of the folder to be deleted (hidden on larger screens) -->
+          <div class="w-50 delete-folder d-none d-lg-block"></div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <!-- Button to go back to the folder dashboard without deleting -->
+        <a class="btn btn-secondary"
+           data-bs-dismiss="modal">
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+        </a>
+        <!-- Button to confirm and proceed with folder deletion -->
+        <button type="submit" class="btn btn-danger" (click)="deleteFolder()" data-bs-dismiss="modal">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<!--- main --->
+<!-- Welcome Section -->
+<section class="welcome-container">
+  <div class="welcome-text">
+    <h2>Flashcard app</h2>
+    <a class="btn btn-create-flashcard"
+       [routerLink]="['/deckform', 'create', null]">
+      Start Now
+    </a>
+  </div>
+  <!-- Shape Icons -->
+  <div class="shape shape-one"><i class="fa-solid fa-clover fa-8x" style="color: #def5e5;"></i></div>
+  <div class="shape shape-two"><i class="fa-solid fa-heart fa-8x" style="color: #def5e5;"></i></div>
+  <div class="shape shape-three"><i class="fa-solid fa-square fa-8x" style="color: #def5e5;"></i></div>
+  <div class="shape shape-four"><i class="fa-solid fa-star fa-8x" style="color: #def5e5;"></i></div>
+</section>
+
+<!-- Flashcard Type Introduction Section -->
+<section class="flashcard-type-intro">
+  <div>
+    <h1>The Journey</h1>
+    <p>
+      Unlock the door to effective learning and personal growth with our flashcard app.
+      Don't miss this opportunity to make education an exciting adventure.
+
+      Ready to begin your learning journey? Sign-up and start exploring. Your path to success is just a click away.
+    </p>
+    <a class="btn btn-create-flashcard text-decoration-none link-dark" href="#demo">Try Demo</a>
+  </div>
+</section>
+
+<!-- Flashcard Example Container Section -->
+<section class="flashcard-example-container" id="demo">
+  <div class="flashcard-example">
+    <div class="flashcard-example-content">
+      <!-- Food Quiz Demo Card -->
+      <a class="card border border-0 text-decoration-none link-dark"
+         (click)="navigateToDeckDemoTwo()">
+        <img src="../../assets/img/food.jpeg" class="card-img-top" alt="Fissure in Sandstone" />
+        <div class="card-body">
+          <h5 class="card-title">Food Quiz Demo</h5>
+          <p class="card-text">One cannot think well, love well, sleep well, if one has not dined well.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="flashcard-example">
+    <div class="flashcard-example-content">
+      <!-- History Quiz Demo Card -->
+      <a class="card border border-0 text-decoration-none link-dark"
+         (click)="navigateToDeckDemoOne()">
+        <img src="../../assets/img/history.jpg" class="card-img-top" alt="Fissure in Sandstone" />
+        <div class="card-body">
+          <h5 class="card-title">History Quiz Demo</h5>
+          <p class="card-text">A generation which ignores history has no past and no future.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 box-shadow border-bottom" style="background-color: #BCEAD5">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <!-- Left -->
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 link-secondary text-decoration-none">
+        <i class="fab fa-facebook-f fa-2x"></i>
+      </a>
+      <a href="" class="me-4 link-secondary text-decoration-none">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="" class="me-4 link-secondary text-decoration-none">
+        <i class="fab fa-linkedin-in fa-2x"></i>
+      </a>
+      <a href="" class="me-4 link-secondary text-decoration-none">
+        <i class="fab fa-github fa-2x"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+  <!-- Section: Links  -->
+  <section class="p-3" style="background-color:#BCEAD5">
+    <div class="container text-center text-md-start d-flex ">
+      <!-- Grid row -->
+      <div class="row ">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fa-solid fa-crown me-3"></i>Flashcard
+          </h6>
+          <p>
+            Get ready to level up your knowledge with our exciting flashcard game! Challenge yourself, master new concepts, and have fun while learning. Let's play and expand your horizons!
+          </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Members
+          </h6>
+          <p>
+            Cart Valderama
+          </p>
+          <p>
+            Elijah Cuady
+          </p>
+          <p>
+            Emil Magnussen
+          </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> Oslo, Oslomet, Norway</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            CV - s364539@oslomet.no
+          </p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            EC - s364563@oslomet.no
+          </p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            EM - 366438@oslomet.no
+          </p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+  <!-- Copyright -->
+  <div class="text-center p-4 box-shadow" style="background-color: #8EC3B0">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->

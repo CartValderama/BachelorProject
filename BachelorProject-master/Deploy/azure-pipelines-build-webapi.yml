@@ -1,0 +1,86 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - API
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: Dev
+  - name: buildConfiguration
+    value: 'Release'
+  - name: AzureOpenAi.Testing
+    value: '$(AzureOpenAi:Testing)'
+  - name: ConnectionStrings.DefaultConnection
+    value: '$(ConnectionStrings:DefaultConnection)'
+  - name: AzureOpenAi.ApiKey
+    value: '$(AzureOpenAi:ApiKey)'
+  - name: ClientApp.WebsiteBaseUrl
+    value: '$(ClientApp:WebsiteBaseUrl)'  
+
+stages:
+  - stage: 'Build'
+    displayName: 'Build API'
+    jobs:
+      - job:
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+        - task: FileTransform@1
+          displayName: "Running File Transform Task"
+          inputs:
+            folderPath: 'API/src/**/'
+            fileType: 'json'
+            targetFiles: 'appsettings.json'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'Restore project dependencies'
+          inputs:
+            command: 'restore'
+            projects: 'API/src/src.csproj'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'Build the project - $(buildConfiguration)'
+          inputs:
+            command: 'build'
+            arguments: '--no-restore --configuration $(buildConfiguration)'
+            projects: 'API/src/src.csproj'
+
+        - task: DotNetCoreCLI@2
+          displayName: 'Publish the project - $(buildConfiguration)'
+          inputs:
+            command: 'publish'
+            projects: 'API/src/src.csproj'
+            publishWebProjects: false
+            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+            zipAfterPublish: true
+
+        - publish: '$(Build.ArtifactStagingDirectory)'
+          artifact: drop
+
+  - stage: 'Dev'
+    displayName: 'Deploy to the dev environment'
+    dependsOn: Build
+    condition:  succeeded()
+    jobs:
+    - deployment: Deploy
+      pool:
+        vmImage: 'ubuntu-latest'
+      environment: dev
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: drop
+            - task: AzureWebApp@1
+              displayName: 'Azure App Service Deploy: website'
+              inputs:
+                azureSubscription: 'aicee-bachelor-connection'
+                appType: 'webAppLinux'
+                appName: 'aicee-api'
+                package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'

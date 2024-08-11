@@ -1,0 +1,53 @@
+<section class="w-100 vh-100 mt-5 create-folder">
+  <!-- Container for the create folder section -->
+  <div class="container d-flex w-75 justify-content-between border border-1 p-0 shadow-sm bg-body rounded">
+    <!-- Right section for creating a new folder -->
+    <div class="p-5 w-100">
+      <h2>{{isEditMode ? 'Update' : 'Create'}} Folder</h2>
+      <hr />
+      <form [formGroup]="folderForm" (ngSubmit)="onSubmit()">
+        <!-- Input field for FolderName -->
+        <div class="form-outline mb-4">
+          <label for="folderName" class="form-label"></label>
+          <input id="folderName" formControlName="folderName" type="text" class="form-control" autocomplete="off" placeholder="Input a folder name" />
+        </div>
+        <div id="validatationFolder">
+          <div *ngIf="folderForm.invalid" class="text-danger">
+            Write 2 - 15 characters long and do not use special character.
+          </div>
+        </div>
+        <!-- Textarea for FolderDescription -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="folderDescription"></label>
+          <textarea class="form-control" id="folderDescription" formControlName="folderDescription" rows="4" placeholder="Write something about your folder ....."></textarea>
+        </div>
+        <!-- Submit and Return buttons -->
+        <div class="form-outline mb-4 d-flex justify-content-between">
+          <button type="submit" class="btn btn-success btn-block mb-1 me-1"
+                  [disabled]="folderForm.invalid">
+            <i class="fa-solid fa-check"></i>
+          </button>
+
+          <a class="btn btn-secondary btn-block mb-1"
+             (click)="backToFolders()">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+    <!-- Left section with background color and quote -->
+    <div class="d-none d-md-block text-center w-50" style="background-color: #BCEAD5">
+      <div class="p-5">
+        <i class="fa-solid fa-folder-open fa-9x mt-5 mb-3" style="color: #8EC3B0;"></i>
+        <figure>
+          <blockquote class="blockquote">
+            <p> “Clutter is nothing more than postponed decisions.”</p>
+          </blockquote>
+          <figcaption class="blockquote-footer">
+            <cite title="Source Title">Barbara Hemphill</cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

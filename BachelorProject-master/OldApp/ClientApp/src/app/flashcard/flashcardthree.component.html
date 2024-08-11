@@ -1,0 +1,146 @@
+<section class="container" style="margin-bottom: 10rem">
+  <!-- Deck navigation and actions -->
+  <div class="d-flex justify-content-between align-items-end mt-5">
+    <!-- Return to folder dashboard button -->
+    <a class="btn btn-secondary btn-block mb-1"
+       (click)="return()">
+      <i class="fa-solid fa-arrow-left-long"></i>
+    </a>
+    <!-- Deck title -->
+    <h1 class="m-0">{{deck.DeckName}}</h1>
+    <!-- Deck settings button -->
+    <a class="link-secondary text-decoration-none ms-2"
+       [routerLink]="['/deck/', deck.DeckId]">
+      <i class="fa-solid fa-gear fa-2x"></i>
+    </a>
+  </div>
+  <hr />
+  <!-- Flashcard type selection buttons -->
+  <div class="d-flex justify-content-center mt-5">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <!-- Flashcard type one button -->
+      <a class="btn btn-outline-secondary d-flex align-items-center"
+         [routerLink]="['/flashcardone/', deck.DeckId]">
+        <img src="assets/img/type1.png" style="width: 2rem; margin-right: 5px" />
+        <p class="m-0 d-none d-md-block">Default</p>
+      </a>
+      <!-- Flashcard type two button -->
+      <a class="btn btn-outline-secondary d-flex align-items-center"
+         [routerLink]="['/flashcardtwo/', deck.DeckId]">
+        <img src="assets/img/type2.png" style="width: 2.5rem;" />
+        <p class="m-0 d-none d-md-block">Matching</p>
+      </a>
+      <a class="btn btn-outline-secondary d-flex align-items-center active"
+         [routerLink]="['/flashcardthree/', deck.DeckId]">
+        <img src="assets/img/type3.png" style="width: 2rem;" />
+        <p class="m-0 d-none d-md-block">Feedback</p>
+      </a>
+    </div>
+  </div>
+  <!-- Instructions -->
+  <div class="instruction mt-4 p-3">
+    <p>Back and the GPT will review it </p>
+  </div>
+  <!-- Progress bar -->
+  <div class="container mt-3 mb-4">
+    <div class="progress">
+      <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+  <div class="carousel-container shadow p-0 rounded-0" style="height: 40rem;">
+    <div id="flashcard-three" class="carousel slide h-100">
+      <div class="carousel-inner h-100">
+        <div class="carousel-item active">
+          <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+            <h1>Start</h1>
+            <p>Introduction card of {{deck.DeckName}} Deck</p>
+            <p>Date of Creation: {{deck.CreationDate}}</p>
+          </div>
+        </div>
+        <!---- carousel loop starts here  ----->
+        <div *ngFor="let flashcard of flashcards">
+          <div class="carousel-item w-100" style="word-break: break-word; height: 40rem;">
+            <div class="d-flex h-100" id="type-3">
+              <div class="d-flex flex-column p-4 justify-content-center h-100" [id]="'rating_' + flashcard.FlashcardId">
+                <div class="d-flex flex-column justify-content-end align-items-center h-100">
+                  <p [id]="'front_' + flashcard.FlashcardId">{{flashcard.Front}}</p>
+                </div>
+                <div class="d-flex flex-column align-items-center">
+                  <textarea [id]="'text_' + flashcard.FlashcardId" class="w-100" placeholder="Your back here"></textarea>
+                  <p [id]="'error_' + flashcard.FlashcardId" style="color: red"></p>
+                  <button [id]="'submit_' + flashcard.FlashcardId" class="btn btn-primary w-50 submit3" type="button" (click)="getBack(flashcard.FlashcardId)">
+                    <div [id]="'status_' + flashcard.FlashcardId" style="display: none">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <i class="fa-solid fa-check" [id]="'check_' + flashcard.FlashcardId"></i>
+                  </button>
+                </div>
+                <p [id]="'quality_' + flashcard.FlashcardId"></p>
+              </div>
+              <!----- Instruction ----->
+              <div class="d-flex justify-content-center align-items-center response" style="background-color: #F0F0F0;">
+                <div [id]="'ins3_' + flashcard.FlashcardId" class="flex-column align-items-center justify-content-center" style="display: flex">
+                  <h2 class="mb-3 mt-3">Instructions</h2>
+                  <div>
+                    <ul>
+                      <li>The flashcard's fronts and backs should make sense for GPT to help.</li>
+                      <li>For each flashcard, read the front and input your back in the provided text box.</li>
+                      <li>Click the "Submit" button to get feedback from GPT.</li>
+                      <li>GPT will provide an explanation and rating for your back.</li>
+                      <li>Please wait patiently while GPT reviews your back.</li>
+                    </ul>
+                  </div>
+
+                  <div [id]="'loading_' + flashcard.FlashcardId" class="justify-content-around" style="height: 2rem; width: 10rem; display: none;">
+                    <div class="spinner-grow text-success" role="status" style="width: 2rem; height: 2rem;">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status" style="width: 2rem; height: 2rem;">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status" style="width: 2rem; height: 2rem;">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status" style="width: 2rem; height: 2rem;">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div [id]="'ans3_' + flashcard.FlashcardId" class="flex-column h-100" style="display: none;">
+                  <div class="d-flex flex-column justify-content-center border-bottom border-4 pb-3" style="height: 45%">
+                    <p class="mb-3">Flashcard's Back:</p>
+                    <p class="m-0">{{flashcard.Back}}</p>
+                  </div>
+                  <div class="d-flex flex-column  h-75 justify-content-center" style="height: 55%">
+                    <p class="mb-3">GPT explanation:</p>
+                    <p [id]="'explanation_' + flashcard.FlashcardId" class="m-0">ChatGPT Rating and Suggestion</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+            <h1>Finito!</h1>
+            <button id="restart" class="btn btn-outline-secondary" style="width:8rem;" type="button" (click)="restartCarousel()">
+              Restart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navigation buttons for the carousel -->
+  <div class="d-flex align-items-center justify-content-evenly mt-4">
+    <button id="prev" class="btn btn-outline-secondary" type="button" data-bs-target="#flashcard-three" data-bs-slide="prev">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <i class="fa-solid fa-crown fa-2x"></i>
+    <button id="next" class="btn btn-outline-secondary" type="button" data-bs-target="#flashcard-three" data-bs-slide="next">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</section>

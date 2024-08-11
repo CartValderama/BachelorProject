@@ -1,0 +1,85 @@
+<section class="container" style="margin-bottom: 10rem">
+  <!-- Deck navigation and actions -->
+  <div class="d-flex justify-content-between align-items-end mt-5">
+    <!-- Return to folder dashboard button -->
+    <a class="btn btn-secondary btn-block mb-1"
+       (click)="return()">
+      <i class="fa-solid fa-arrow-left-long"></i>
+    </a>
+    <!-- Deck title -->
+    <h1 class="m-0">{{deck.DeckName}}</h1>
+    <!-- Deck settings button -->
+    <a class="link-secondary text-decoration-none ms-2"
+       [routerLink]="['/deck/', deck.DeckId]">
+      <i class="fa-solid fa-gear fa-2x"></i>
+    </a>
+  </div>
+  <hr />
+  <!-- Flashcard type selection buttons -->
+  <div class="d-flex justify-content-center mt-5">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <!-- Flashcard type one button -->
+      <a class="btn btn-outline-secondary d-flex align-items-center"
+         [routerLink]="['/flashcardone/', deck.DeckId]">
+        <img src="assets/img/type1.png" style="width: 2rem; margin-right: 5px" />
+        <p class="m-0 d-none d-md-block">Default</p>
+      </a>
+      <!-- Flashcard type two button -->
+      <a class="btn btn-outline-secondary d-flex align-items-center active"
+         [routerLink]="['/flashcardtwo/', deck.DeckId]">
+        <img src="assets/img/type2.png" style="width: 2.5rem;"/>
+        <p class="m-0 d-none d-md-block">Matching</p>
+      </a>
+      <a class="btn btn-outline-secondary d-flex align-items-center"
+         [routerLink]="['/flashcardthree/', deck.DeckId]">
+        <img src="assets/img/type3.png" style="width: 2rem;" />
+        <p class="m-0 d-none d-md-block">GPT-Quiz</p>
+      </a>
+    </div>
+  </div>
+  <!-- Instructions -->
+  <div class="instruction mt-4 p-3">
+    <p id="ins">Match the correct Fronts and Backs</p>
+  </div>
+  <div class="container">
+    <!-- Progress bar -->
+    <div class="progress mt-3">
+      <div id="progress-bar2" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <!-- Game finish message and restart button -->
+    <div id="game-finish-message" class="text-center mt-5" style="display: none;">
+      <h4>Congratulations! You have completed the game.</h4>
+      <button id="restart" class="btn btn-outline-secondary" style="width:8rem;" type="button" (click)="restartMatch()">
+        Restart
+      </button>
+    </div>
+    <!-- Match card and back card display -->
+    <div class="d-flex justify-content-between mt-3">
+      <!-- Display match fronts -->
+      <div class="d-flex flex-column align-items-center justify-content-center w-50 text-center" style="word-break: break-word">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 p-2">
+          <div *ngFor="let flashcard of randomFronts">
+            <div class="col match-card" (click)="checkFront(flashcard)">
+              <div class="front shadow-sm rounded-1 w-100 h-100 user-select-none" [id]="flashcard.FlashcardId + '_front'">
+                {{flashcard.Front}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Display match backs -->
+      <div class="d-flex flex-column align-items-center w-50 text-center">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 p-2">
+          <div *ngFor="let flashcard of randomBacks">
+            <div class="col match-card" (click)="checkBack(flashcard)">
+              <div class="back shadow-sm rounded-1 w-100 h-100 user-select-none" [id]="flashcard.FlashcardId + '_back'">
+                {{flashcard.Back}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

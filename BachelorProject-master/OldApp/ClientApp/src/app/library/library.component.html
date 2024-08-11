@@ -1,0 +1,65 @@
+<section class="container mb-5">
+  <!-- Container for library section -->
+  <div class="container d-flex justify-content-between align-items-center mt-5">
+    <!-- Title for the library -->
+    <h1>My Library</h1>
+    <div class="d-flex">
+      <!-- Buttons for adding a folder and a deck -->
+
+      <a class="btn btn-secondary d-flex align-items-center me-2 mb-0"
+         [routerLink]="['/folderform', 'create', -1]">
+        <p class="d-none d-sm-block me-2 mb-0">Add Folder </p>
+        <i class="fa-solid fa-folder-plus"></i>
+      </a>
+      <a class="btn btn-success d-flex me-2 align-items-center"
+         [routerLink]="['/deckWithAi', 'create', null]">
+        <p class="d-none d-sm-block me-2 mb-0">AI Deck </p>
+        <i class="fa-solid fa-square-plus"></i>
+      </a>
+      <a class="btn btn-success d-flex align-items-center"
+         [routerLink]="['/deckform', 'create', null]">
+        <p class="d-none d-sm-block me-2 mb-0">Add Deck </p>
+        <i class="fa-solid fa-square-plus"></i>
+      </a>
+
+    </div>
+  </div>
+  <hr />
+  <div class="w-50 mt-4 mb-5" style="max-width: 15rem;">
+    <div class="input-group">
+      <input class="form-control border rounded-pill"
+             type="search"
+             placeholder="search"
+             [(ngModel)]="listFilter" />
+    </div>
+  </div>
+  <div class="row row-cols-2 row-cols-md-5 row-cols-auto justify-content-start  list-folderdeck mt-5 mb-4">
+    <!-- Loop through each folder in the model -->
+    <div *ngFor="let folder of filteredFolders">
+      <div class="col">
+        <div class="row row-cols-2 justify-content-center">
+          <!-- Link to navigate to the folder dashboard -->
+          <a class="link-dark text-decoration-none p-2 text-center"
+             [routerLink]="['/folder', folder.FolderId]">
+            <i class="fa-solid fa-folder fa-5x test-shadow" style="color: #8EC3B0; text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2); "></i>
+            <p class="m-0">{{ folder.FolderName }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loop through each deck in the model -->
+    <div *ngFor="let deck of filteredDecks">
+      <div class="col">
+        <div class="row row-cols-2 justify-content-center">
+          <!-- Link to start flashcards for the deck -->
+          <a class="text-decoration-none icon-link-hover link-dark p-2 text-center"
+             [routerLink]="['/flashcardone/', deck.DeckId]">
+            <i class="fa-regular fa-square fa-5x" style="color: green; text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);"></i>
+            <p class="m-0">{{ deck.DeckName }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
