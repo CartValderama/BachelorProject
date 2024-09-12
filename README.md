@@ -1,6 +1,6 @@
 
 
-# AI.CEE - AI-Enhanced Flashcard Application (Copy)
+# AI.CEE - AI-Enhanced Flashcard Application 
 - This is a copy of our bachelor project
   
 ## Overview
